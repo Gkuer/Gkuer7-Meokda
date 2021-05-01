@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.views.generic.detail import DetailView
 
 # Create your models here.
 
@@ -39,3 +40,5 @@ class Article(models.Model):
     date = models.DateTimeField()
     author = models.CharField(max_length=30)
     file = models.FileField(null=True)
+
+

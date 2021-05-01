@@ -69,3 +69,5 @@ class ArticlesView(ListView):
     context_object_name = 'videos'
     template_name = 'video/articles.html'
 
+
+

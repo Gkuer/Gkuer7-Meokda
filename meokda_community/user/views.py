@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from .models import meokda_user
 from django.contrib.auth.hashers import make_password,check_password
 from .forms import LoginForm
+from django.views.generic import ListView, DeleteView, DetailView,CreateView,UpdateView 
+
 
 # Create your views here.
 
@@ -61,3 +63,8 @@ def register(request):
 
 def about(request):
     return render(request, 'about.html')
+
+class UserProfile(DetailView):
+    template_name = "UserProfile.html"
+    queryset = meokda_user.objects.all()
+    context_object_name = 'uuser'

@@ -15,58 +15,64 @@
 </head>
 
 <body>
-  <section style = 'position: fixed; z-index:666;top:0; right: 0; left:0;'>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
-    <div class="container">
-      <a class="navbar-brand" href="/">Meokda</a>
+  <section style='position: fixed; z-index:666;top:0; right: 0; left:0;'>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="/">Meokda</a>
 
 
 
-      <form class="form-inline  my-lg-0  d-flex justify-content-center align-items-center container">
-        <input class="form-control mr-sm-2" type="text" placeholder="제작지원 - 조코딩 유튜브채널">
-        <button type='button' class="btn btn-secondary " onclick=" location.href = 'https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg'">
-          이동</button>
-      </form>
+        <form class="form-inline  my-lg-0  d-flex justify-content-center align-items-center container">
+          <input class="form-control mr-sm-2" type="text" placeholder="검색">
+          <button type='button' class="btn btn-secondary " >
+            검색</button>
+        </form>
 
 
-      <button type="button" class="btn btn-info mr-5" style="white-space:nowrap; "
-        onclick="location.href = '/video/new'">글쓰기</button>
+        <button type="button" class="btn btn-info mr-5" style="white-space:nowrap; "
+          onclick="location.href = '/video/new'">글쓰기</button>
 
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home
-          </a>
-        </li>
-        {% if request.session.user %}
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="/user/about">About</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#"> {{ request.session.user }} </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/user/logout">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="/user/login">Login</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/user/about">About</a>
-        </li>
-        {% endif %}
-      </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+            </a>
+          </li>
+          {% if request.session.user %}
 
 
-  </nav>
-</section>
-<div style ='height:75px;'>
+          
 
-</div>
+          <li class= "nav-item " style = "margin-top: 3;">
+            <div class="box" style="background: #BDBDBD; width: 35px; height: 35px; border-radius: 70%; overflow: hidden;">
+              <img class="profile" style = "width: 100%; height: 100%; object-fit: cover;" src="/static/gkuer7.png">
+          </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> {{ request.session.user }} </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/logout">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/about">About</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/user/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/about">About</a>
+          </li>
+
+          {% endif %}
+        </ul>
+
+
+    </nav>
+  </section>
+  <div style="height:75;">
+
+  </div>
 
   <div class="container text-center infinite-container">
 
@@ -120,7 +126,9 @@
 
 
         <script>
+
           function unmute(self) {
+            var $video = $('#video{{video.id}}');
             const player = document.getElementById(self);
 
             if (player.muted) {
@@ -132,31 +140,12 @@
 
             }
             if (player.pause()) {
-              player.play();
+              $video[0].play();
             }
           }
-          $(function () {
 
-            var $video = $('#video{{video.id}}');
-            var $window = $(window);
 
-            $window.scroll(function () {
 
-              var $topOfVideo = $video.offset().top;
-              var $bottomOfVideo = $video.offset().top + $video.outerHeight();
-
-              var $topOfScreen = $window.scrollTop();
-              var $bottomOfScreen = $window.scrollTop() + $window.innerHeight();
-
-              if (($bottomOfScreen > $bottomOfVideo) && ($topOfScreen < $topOfVideo)) {
-                $video[0].play();
-              } else {
-                $video[0].pause();
-              }
-
-            });
-
-          });
         </script>
 
 
@@ -192,6 +181,33 @@
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
 
+  <script>
+    $(function () {
+
+      var $video = $('#video{{video.id}}');
+      var $window = $(window);
+
+
+      $window.scroll(function () {
+
+        var $topOfVideo = $video.offset().top;
+        var $bottomOfVideo = $video.offset().top + $video.outerHeight();
+
+        var $topOfScreen = $window.scrollTop();
+        var $bottomOfScreen = $window.scrollTop() + $window.innerHeight();
+        
+        if (($topOfScreen < $topOfVideo) &&  ($bottomOfScreen > $bottomOfVideo) ) {
+          $video[0].play();
+
+        } else {
+          $video[0].pause();
+
+        }
+
+      });
+
+    });
+  </script>
 
 </body>
 
