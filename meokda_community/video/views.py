@@ -1,5 +1,6 @@
 from django.db.models.query_utils import select_related_descend
 from django.shortcuts import render,redirect
+
 from .models import Video
 from .forms import VideoForm
 from django.views.generic import ListView, DeleteView, DetailView,CreateView,UpdateView 
@@ -10,6 +11,8 @@ from django.utils.decorators import method_decorator
 from user.decorators import login_required
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 
 # import simplejson as json
@@ -23,9 +26,16 @@ class VideoListView(ListView):
     paginate_by = 4
     context_object_name = 'video_list'
     template_name = 'video/video_list.html'
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(VideoListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['ddd'] = meokda_user.objects.filter(username=self.request.session.get('user'))
+        return context
 
 def index(request):
-    return render(request, 'index.html', {'username' : request.session.get('user')})
+    sks = 'sadf'
+    return render(request, 'index.html', {'username' : request.session.get('user')},{'sfd' : sks})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -33,6 +43,7 @@ class VideoCreateView(CreateView):
     model = Video
     form_class = VideoForm
     template_name = 'form2.html'
+
 
 
     def form_valid(self, form):
@@ -70,4 +81,7 @@ class ArticlesView(ListView):
     template_name = 'video/articles.html'
 
 
-
+class UserProfile(DetailView):
+    template_name = "UserProfile.html"
+    queryset = meokda_user.objects.all()
+    context_object_name = 'uuser'

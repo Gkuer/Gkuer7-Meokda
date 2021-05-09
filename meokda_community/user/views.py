@@ -64,7 +64,3 @@ def register(request):
 def about(request):
     return render(request, 'about.html')
 
-class UserProfile(DetailView):
-    template_name = "UserProfile.html"
-    queryset = meokda_user.objects.all()
-    context_object_name = 'uuser'
