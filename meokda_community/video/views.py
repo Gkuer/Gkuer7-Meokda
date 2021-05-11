@@ -82,6 +82,13 @@ class ArticlesView(ListView):
 
 
 class UserProfile(DetailView):
-    template_name = "UserProfile.html"
-    queryset = meokda_user.objects.all()
-    context_object_name = 'uuser'
+    model = Video
+    paginate_by = 4
+    context_object_name = 'video_list'
+    template_name = 'UserProfile.html'
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['ddd'] = meokda_user.objects.filter(username=self.request.session.get('user'))
+        return context
