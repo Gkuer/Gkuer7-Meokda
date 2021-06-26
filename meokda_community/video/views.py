@@ -1,6 +1,6 @@
 from django.db.models.query_utils import select_related_descend
 from django.shortcuts import render,redirect
-
+from django.views.generic.list import ListView
 from .models import Video
 from .forms import VideoForm
 from django.views.generic import ListView, DeleteView, DetailView,CreateView,UpdateView 
@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 # from rest_framework.pagination import PageNumberPegination
 # Create your views here.
 
-
+# 메인화면
 class VideoListView(ListView):
     model = Video
     paginate_by = 4
@@ -33,19 +33,13 @@ class VideoListView(ListView):
         context['ddd'] = meokda_user.objects.filter(username=self.request.session.get('user'))
         return context
 
-def index(request):
-    sks = 'sadf'
-    return render(request, 'index.html', {'username' : request.session.get('user')},{'sfd' : sks})
 
-
+# 비디오 업로드
 @method_decorator(login_required, name='dispatch')
 class VideoCreateView(CreateView):
     model = Video
     form_class = VideoForm
     template_name = 'form2.html'
-
-
-
     def form_valid(self, form):
         video = form.save(commit=False)
         user_id = self.request.session.get('user')
@@ -53,7 +47,6 @@ class VideoCreateView(CreateView):
         video.author = meokdauser
         return super().form_valid(form)
     
-    # success_url = '/'
 
 
 class VideoDetailView(DetailView):
@@ -71,24 +64,11 @@ class VideoDeleteView(DeleteView):
     success_url = reverse_lazy('video:video_list')
 
 
-from django.views.generic.list import ListView
-from .models import Article
 
-class ArticlesView(ListView):
-    model = Article
-    paginate_by = 5
-    context_object_name = 'videos'
-    template_name = 'video/articles.html'
-
-
-class UserProfile(DetailView):
-    model = Video
-    paginate_by = 4
-    context_object_name = 'video_list'
-    template_name = 'UserProfile.html'
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
-        context = super(UserProfile, self).get_context_data(**kwargs)
-        # Create any data and add it to the context
-        context['ddd'] = meokda_user.objects.filter(username=self.request.session.get('user'))
-        return context
+# 다른 사람이 보는 프로필
+def UserProfile(request, username2):
+    babo = Video.objects.filter(author = meokda_user.objects.get(username = username2))
+    babo2 = username2
+    babo3 = meokda_user.objects.get(username = username2)
+    return render(request,'UserProfile.html',{'babo':babo, 'babo2':babo2, 'babo3':babo3})
+    

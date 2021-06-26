@@ -1,1 +1,294 @@
-{{{ddd}}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meokda {{ babo3 }}'s Profile</title>
+    {% load static %}
+    {% load humanize %}
+    <link rel="stylesheet" href="{% static 'style5.css' %}">
+    <link rel="stylesheet" href="/static/bootstrap.min-4.css">
+    <script src="{% static 'dist/script.js' %}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <body class="profile-page">
+        <!-- nav bar -->
+        <section style='position: fixed; z-index:666;top:0; right: 0; left:0;'>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Meokda</a>
+
+
+
+                    <form class="form-inline  my-lg-0  d-flex justify-content-center align-items-center container">
+                        <input class="form-control mr-sm-2" type="text" placeholder="검색">
+                        <button type='button' class="btn btn-secondary ">
+                            검색</button>
+                    </form>
+
+
+                    <button type="button" class="btn btn-info mr-5" style="white-space:nowrap; "
+                        onclick="location.href = '/video/new'">글쓰기</button>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home
+                            </a>
+                        </li>
+                        {% if request.session.user %}
+
+
+
+
+                        <li class="nav-item " style="margin-top: 3;">
+                            <div class="box"
+                                style="background: #BDBDBD; width: 35px; height: 35px; border-radius: 70%; overflow: hidden;">
+
+
+                                <img class="profile" style="width: 100%; height: 100%; object-fit: cover;"
+                                    src=" {{ babo3.profile_pic.url }}">
+
+
+
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/user/image/{{request.session.user}}">
+                                {{request.session.user }} </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/logout">logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/about">About</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/about">About</a>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+
+
+            </nav>
+        </section>
+
+
+        <!-- 프로필 사진 -->
+        <div class="page-header header-filter" data-parallax="true"
+            style="background-image:url('{http://wallpapere.org/wp-content/uploads/2012/02/black-and-white-city-night.png}');">
+        </div>
+        <div class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="md-6 ml-auto mr-auto">
+                            <div class="profile">
+                                <!-- 설정한 프로필 사진 -->
+                                <div class="avatar">
+                                    <img id="profile_image" src="{{babo3.profile_pic.url}}" alt="Circle Image"
+                                        class="img-raised rounded-circle img-fluid" style="height:160px">
+                                </div>
+
+
+
+
+
+                                <!-- 유저 이름 -->
+                                <div class="name" style="display: inline-block; vertical-align:middle">
+                                    <h3 class="title" style="display: inline-block; vertical-align:middle">{{babo3}}
+                                    </h3>
+                                    </br></br>
+                                    <!-- 유저 코멘트 -->
+                                    <h5 style="display: inline-block; vertical-align:middle">{{babo3.user_comment}}</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 유저 이메일 -->
+                    <div class="description text-center">
+                        <p>User Email: </br> {{ babo3.useremail }}</p>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div class="profile-tabs ">
+                                <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active">
+                                            <i class="material-icons"></i>
+                                            {{babo2}}의 동영상들
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <!-- 비디오 재생 -->
+                                {% if babo %}
+
+                                {% for video in babo %}
+                                <div class="card text-center mt-5 infinite-item">
+
+                                    <div> 업로드 : {{video.created_at }}
+
+
+
+                                    </div>
+                                    <div class="card-header bg-transparent">
+                                        <div class="row">
+                                            <a class="nav-link navbar-brand  text-muted mr-0" href="#">
+                                                <h4>{{video.restaurant}}</h4>
+                                            </a>
+                                            <a class="nav-link navbar-brand  text-muted ml-0 mt-1"
+                                                href="#"><small>{{video.distance}}km</small></a>
+
+                                            <a class="nav-link  navbar-brand  text-muted ml-auto"
+                                                href="#">{{video.author}}</a>
+                                            </li>
+                                        </div>
+
+                                        <div class="row">
+                                            <a class="nav-link navbar-brand  text-muted mr-0"
+                                                href="#">{{video.foodname}}</a>
+                                            <a class="nav-link navbar-brand  text-muted ml-0 mt-1"
+                                                href="#"><small>{{video.price | intcomma}}원</small></a>
+
+                                            <a class="nav-link navbar-brand  ml-auto text-muted"
+                                                href="#">{{video.get_status_display }}</a>
+                                        </div>
+
+                                    </div>
+
+        
+                                    <div class="card-body" style="padding:0;">
+                                        <video id='video{{video.id}}' class="video center align-middle" controls="true"
+                                            autoplay muted loop playsinline style='max-width: 100%; max-height: 700px;'
+                                            onclick="unmute('video{{video.id}}')">
+                                            <source src="{{ video.file.url }}" type="video/mp4">
+                                            </source>
+
+                                            Your browser does not support the video tag.
+                                        </video>
+
+                                        <!-- 비디오 mute/unmute action -->
+                                        <script>
+                                            function unmute(self) {
+                                                var $video = $('#video{{video.id}}');
+                                                const player = document.getElementById(self);
+
+                                                if (player.muted) {
+                                                    player.muted = false;
+
+                                                }
+                                                else {
+                                                    player.muted = true;
+
+                                                }
+                                                if (player.pause()) {
+                                                    $video[0].play();
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                            <div class="loading" style="display: none;">
+                                Loading...
+                            </div>
+
+                            {% if page_obj.has_next %}
+                            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+                            {% endif %}
+
+                            <!-- infinite scroll -->
+                            <script>
+                                var infinite = new Waypoint.Infinite({
+                                    element: $('.infinite-container')[0],
+
+                                    onBeforePageLoad: function () {
+                                        $('.loading').show();
+                                    },
+                                    onAfterPageLoad: function ($items) {
+                                        $('.loading').hide();
+                                    }
+                                });
+                            </script>
+
+                            <script
+                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+                                integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+                                crossorigin="anonymous"></script>
+                            
+                            <!-- scroll에 따른 play/stop -->
+                            <script>
+                                $(function () {
+
+                                    var $video = $('#video{{video.id}}');
+                                    var $window = $(window);
+
+
+                                    $window.scroll(function () {
+
+                                        var $topOfVideo = $video.offset().top;
+                                        var $bottomOfVideo = $video.offset().top + $video.outerHeight();
+
+                                        var $topOfScreen = $window.scrollTop();
+                                        var $bottomOfScreen = $window.scrollTop() + $window.innerHeight();
+
+                                        if (($topOfScreen < $topOfVideo) && ($bottomOfScreen > $bottomOfVideo)) {
+                                            $video[0].play();
+
+                                        } else {
+                                            $video[0].pause();
+
+                                        }
+
+                                    });
+
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 올린 비디오 없을때 -->
+            {% else %}
+
+            </br></br></br></br></br></br></br></br></br>
+            <div style="text-align: center;">
+                <a style="text-align: center;"> 아직 비디오가 없어요 :(</a>
+
+            </div>
+            </br></br></br></br></br></br></br></br></br>
+
+            {% endif %}
+
+
+
+
+        </div>
+
+
+    </body>
+
+</html>

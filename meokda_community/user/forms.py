@@ -1,7 +1,7 @@
 from django import forms
 from .models import meokda_user
 from django.contrib.auth.hashers import check_password
-
+from django.forms import ModelForm
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -30,3 +30,9 @@ class LoginForm(forms.Form):
                 self.add_error('password', '비밀번호를 틀렸습니다.')
             else:
                 self.username = meokdauser.username
+
+class ImageForm(ModelForm):
+    class Meta:
+        model = meokda_user
+        fields = '__all__'
+        exclude = ['username', 'useremail','password']

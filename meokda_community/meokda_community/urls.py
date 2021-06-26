@@ -26,9 +26,9 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    path('board/', include('board.urls')), 
     path('video/', include('video.urls')),
-    path('',RedirectView.as_view(pattern_name='video:video_list'), name='root'),
+    path('', include('video.urls')),
 ]
 
+# static file 연결
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

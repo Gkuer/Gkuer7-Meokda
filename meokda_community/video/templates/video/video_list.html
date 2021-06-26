@@ -15,13 +15,11 @@
 </head>
 
 <body>
+  <!-- navbar -->
   <section style='position: fixed; z-index:666;top:0; right: 0; left:0;'>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
       <div class="container">
         <a class="navbar-brand" href="/">Meokda</a>
-
-
-
         <form class="form-inline  my-lg-0  d-flex justify-content-center align-items-center container">
           <input class="form-control mr-sm-2" type="text" placeholder="검색">
           <button type='button' class="btn btn-secondary ">
@@ -45,11 +43,17 @@
           <li class="nav-item " style="margin-top: 3;">
             <div class="box"
               style="background: #BDBDBD; width: 35px; height: 35px; border-radius: 70%; overflow: hidden;">
-              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src="/static/gkuer7.png">
+              {% for i in ddd %}
+              {% if i.profile_pic %}
+              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src=" {{i.profile_pic.url}}">
+              {% else %}
+              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src="{% static 'nomal_profile.png' %}" >
+              {% endif %}
+              {% endfor %}
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% for i in ddd %} {{i.pk}} {% endfor %}"> {{ request.session.user }} </a>
+            <a class="nav-link" href="{% for i in ddd %} http://127.0.0.1:8000/user/image/{{request.session.user}}{% endfor %}"> {{ request.session.user }} </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/logout">logout</a>
@@ -67,14 +71,14 @@
 
           {% endif %}
         </ul>
-
-
     </nav>
   </section>
+
+  <!-- 본문 -->
+  <!-- 여백 -->
   <div style="height:75;">
-
   </div>
-
+<!-- 현위치 지도 및 로드뷰 -->
   <div class="container text-center infinite-container">
     <div>
     <div id="map" style="float:left; width:50%;height:350px;"></div>
@@ -167,6 +171,8 @@
       }
 
     </script>
+
+    <!-- 현위치 좌표 -->
     <script>
       function returnPosition(x) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -180,14 +186,17 @@
       };
     </script>
 
+    <!-- 현위치 좌표 표시 -->
     <div id="kbs">
-
     </div>
     <script>returnPosition("kbs")</script>
+    
+
+    <!-- 비디오 나열 -->
     {% for video in video_list %}
     <div class="card text-center mt-5 infinite-item">
 
-      <div> {{video.author }}
+      <div> 
 
 
         {% if request.session.user == 'gkuer' %}
@@ -195,12 +204,10 @@
         <button class="btn btn-info" onclick="location.href = '{% url 'video:video_delete' video.pk %}'">삭제</button>
 
         {% else %}
-        video{{ video.id }}
-        {{ video.pk }}
-        {{ video.self.pk }}
-        {{ video.self.id }}
+        
+      <a>Meokda {{ video.pk }}번째 비디오</a>
+       
 
-        dd
         {% endif %}
       </div>
       <div class="card-header bg-transparent">
@@ -210,7 +217,7 @@
           </a>
           <a class="nav-link navbar-brand  text-muted ml-0 mt-1" href="#"><small>{{video.distance}}km</small></a>
 
-          <a class="nav-link  navbar-brand  text-muted ml-auto" href="#">{{video.author}}</a>
+          <a class="nav-link  navbar-brand  text-muted ml-auto" href="UserProfile/{{video.author}}">{{video.author}}</a>
           </li>
         </div>
 
@@ -233,9 +240,8 @@
           Your browser does not support the video tag.
         </video>
 
-
+        <!-- 클릭 시 mute/unmute 동작 -->
         <script>
-
           function unmute(self) {
             var $video = $('#video{{video.id}}');
             const player = document.getElementById(self);
@@ -252,11 +258,7 @@
               $video[0].play();
             }
           }
-
-
-
         </script>
-
 
       </div>
     </div>
@@ -269,6 +271,7 @@
     Loading...
   </div>
 
+  <!-- infinite scroll -->
   {% if page_obj.has_next %}
   <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
   {% endif %}
@@ -290,6 +293,7 @@
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
 
+  <!-- 스크롤에 따른 비디오 재생/정지 -->
   <script>
     $(function () {
 
