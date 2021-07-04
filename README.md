@@ -2,13 +2,25 @@
 음식 동영상 플랫폼 & 주변 맛집 동영상 <br>
 contact us : gkuer95@gmail.com<br><br>
 
+<플랫폼 설명>
 점심 뭐먹지? 저녁 뭐먹지? 야식 뭐먹지? <br>
 하루 3번하는 고민! 현재 위치 주변 맛집들 영상 보면서 선택하자!<br><br>
 
 현재 자신의 위치 주변에 맛집들의 음식 동영상들이 와르르!<br>
 뭐 먹을지 고민하고 있나요? 우리가 도와줄게요.
+
 <br><br><br><br><br>
+
+<개발 설명>
+<h3> 1. 로그인 화면</h3>
 ![스크린샷 2021-07-05 오전 5 13 48](https://user-images.githubusercontent.com/64361457/124398390-6d8cd380-dd50-11eb-9be7-26ab462abfad.png)
+
+<h4> Djnago 기반 제작하였습니다. </h4>
+
+<h3> 1. 로그인 화면</h3>
+![스크린샷 2021-07-05 오전 5 13 48](https://user-images.githubusercontent.com/64361457/124398390-6d8cd380-dd50-11eb-9be7-26ab462abfad.png)
+
+<h4> Djnago 기반 제작하였습니다. </h4>
 ![스크린샷 2021-07-05 오전 5 15 29](https://user-images.githubusercontent.com/64361457/124398396-7a112c00-dd50-11eb-8a93-d47edbf6bb7b.png)
 ![스크린샷 2021-07-05 오전 5 17 35](https://user-images.githubusercontent.com/64361457/124398397-7aa9c280-dd50-11eb-97f7-3695557cee57.png)
 ![스크린샷 2021-07-05 오전 5 17 46](https://user-images.githubusercontent.com/64361457/124398404-81d0d080-dd50-11eb-96e4-e24d7c30e3bf.png)
