@@ -12,15 +12,15 @@ contact us : gkuer95@gmail.com<br><br>
 <br><br><br><br><br>
 
 <개발 설명>
-<h3> 1. 로그인 화면</h3>
+<h3> 1. 로그인 & 회원가입 &</h3>
 ![스크린샷 2021-07-05 오전 5 13 48](https://user-images.githubusercontent.com/64361457/124398390-6d8cd380-dd50-11eb-9be7-26ab462abfad.png)
 
-<h4> Djnago 기반 제작하였습니다. </h4>
+<h4> Djnago 기반 제작하였습니다. <br> Social login은 배포하지 않아 적용하지 않았습니다.</h4>
 
-<h3> 1. 로그인 화면</h3>
+<h3> 2. 동영상 업로드</h3>
 ![스크린샷 2021-07-05 오전 5 13 48](https://user-images.githubusercontent.com/64361457/124398390-6d8cd380-dd50-11eb-9be7-26ab462abfad.png)
 
-<h4> Djnago 기반 제작하였습니다. </h4>
+<h4> 1) 가게이름을 검색하는 동안 실시간으로 추천목록이 AutoComplete으로 뜨게하였습니다. key up down으로 감지하여 ajax를 통하여 해당 Inputdata를 view로 전송하였고, view에서는 naver open api를 이용하여 해당 글자에 맞는 검색결과를 끌어와 template으로 전송하였습니다.<br>2) 사용자가 가게이름을 쓰는 동안, 그리고 다 쓴 후, 실시간으로 가게 주소를 가게 주소칸에 value를 바꿔 자동으로 작성되게 하였으며, X좌표와 Y좌표 또한 기입되게 하여 나중에 거리산출에 쓰일 수 있도록 구성하였습니다. 모두 네이버 open api에서 items목록에서 뽑아왔으며, 좌표의 경우에는 네이버는  tm 128(카텍) 좌표를 송출하여 latlng형식으로 바꿔준 뒤 데이터베이스에 저장하였습니다. <br> 3) 동영상 형식만 올릴 수 있도록 파일업로드를 form.py를 통해 제한하였으며, 형식을 모두 채울 경우에만 post되도록 하였습니다.</h4>
 ![스크린샷 2021-07-05 오전 5 15 29](https://user-images.githubusercontent.com/64361457/124398396-7a112c00-dd50-11eb-8a93-d47edbf6bb7b.png)
 ![스크린샷 2021-07-05 오전 5 17 35](https://user-images.githubusercontent.com/64361457/124398397-7aa9c280-dd50-11eb-97f7-3695557cee57.png)
 ![스크린샷 2021-07-05 오전 5 17 46](https://user-images.githubusercontent.com/64361457/124398404-81d0d080-dd50-11eb-96e4-e24d7c30e3bf.png)
