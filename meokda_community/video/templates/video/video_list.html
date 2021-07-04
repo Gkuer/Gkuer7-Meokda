@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="/static/bootstrap.min-4.css">
   {% load static %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -47,13 +45,15 @@
               {% if i.profile_pic %}
               <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src=" {{i.profile_pic.url}}">
               {% else %}
-              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src="{% static 'nomal_profile.png' %}" >
+              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;"
+                src="{% static 'nomal_profile.png' %}">
               {% endif %}
               {% endfor %}
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% for i in ddd %} http://127.0.0.1:8000/user/image/{{request.session.user}}{% endfor %}"> {{ request.session.user }} </a>
+            <a class="nav-link"
+              href="{% for i in ddd %} http://127.0.0.1:8000/user/image/{{request.session.user}}{% endfor %}"> {{request.session.user }} </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/logout">logout</a>
@@ -78,14 +78,14 @@
   <!-- 여백 -->
   <div style="height:75;">
   </div>
-<!-- 현위치 지도 및 로드뷰 -->
+  <!-- 현위치 지도 및 로드뷰 -->
   <div class="container text-center infinite-container">
     <div>
-    <div id="map" style="float:left; width:50%;height:350px;"></div>
-    <div id="roadview" style="float:right; width:50%;height:350px;"></div>
-  </div>
+      <div id="map" style="float:left; width:50%;height:350px;"></div>
+      <div id="roadview" style="float:right; width:50%;height:350px;"></div>
+    </div>
     <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d5a1f95978430a8fb191d78f07f9b87"></script>
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c99e3a99399a45d1eb7c7fa9158f4d0"></script>
     <script>
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
@@ -177,7 +177,7 @@
       function returnPosition(x) {
         navigator.geolocation.getCurrentPosition(function (position) {
 
-          var lat = position.coords.latitude, // 위도
+            var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
 
           document.getElementById(x).innerHTML = "위도:" + lat + ", " + "경도:" + lon;
@@ -190,13 +190,13 @@
     <div id="kbs">
     </div>
     <script>returnPosition("kbs")</script>
-    
+
 
     <!-- 비디오 나열 -->
     {% for video in video_list %}
     <div class="card text-center mt-5 infinite-item">
 
-      <div> 
+      <div>
 
 
         {% if request.session.user == 'gkuer' %}
@@ -204,19 +204,42 @@
         <button class="btn btn-info" onclick="location.href = '{% url 'video:video_delete' video.pk %}'">삭제</button>
 
         {% else %}
-        
-      <a>Meokda {{ video.pk }}번째 비디오</a>
-       
+
+        <a>Meokda {{ video.pk }}번째 비디오</a>
+
 
         {% endif %}
       </div>
       <div class="card-header bg-transparent">
         <div class="row">
-          <a class="nav-link navbar-brand  text-muted mr-0" href="#">
+          <a class="nav-link navbar-brand  text-muted mr-0" href='https://map.naver.com/v5/search/{{video.restaurant}}'
+            target='_blank'>
             <h4>{{video.restaurant}}</h4>
           </a>
-          <a class="nav-link navbar-brand  text-muted ml-0 mt-1" href="#"><small>{{video.distance}}km</small></a>
+          <a class="nav-link navbar-brand  text-muted ml-0 mt-1" href="#"><small id = "{{video.mapx}}"> </small></a>
+    <!-- 직선거리계산 -->
+          <script>
+            var cc = "{{video.mapx}}";
+            var dd = "{{video.mapy}}";
+            var mylat = "{{mylat}}";
+            var mylng = "{{mylng}}";
+            console.log(cc,dd);
+            console.log(mylat,mylng);
+            aaaa = getDistanceFromLatLonInKm(cc,dd,mylat,mylng);
+            document.getElementById(cc).innerHTML= aaaa;
+            
 
+            function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) { 
+                function deg2rad(deg) { return deg * (Math.PI / 180) } var R = 6371; 
+                var dLat = deg2rad(lat2-lat1); 
+                var dLon = deg2rad(lng2-lng1); 
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                var d = R * c;
+                var d = (d*0.01).toFixed(0) + "km";
+                return d
+              }
+          </script>
           <a class="nav-link  navbar-brand  text-muted ml-auto" href="UserProfile/{{video.author}}">{{video.author}}</a>
           </li>
         </div>
@@ -321,6 +344,7 @@
 
     });
   </script>
+  
 
 </body>
 

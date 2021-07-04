@@ -13,13 +13,15 @@ class Video(models.Model):
   }
 
     restaurant = models.CharField(max_length = 128, verbose_name = '가게이름')
+    address = models.CharField(max_length=512, verbose_name='가게주소',null=True)
     foodname = models.CharField(max_length= 128, verbose_name= '음식이름')
     file = models.FileField()
 
     price = models.PositiveIntegerField(default=0)
     status =  models.CharField(max_length=80, choices= status_choices, null=True)
-    distance = models.PositiveIntegerField(default=0, verbose_name='거리')
-
+    mapx = models.FloatField(default=0, verbose_name='X좌표',null=True)
+    mapy = models.FloatField(default=0, verbose_name='Y좌표',null=True)
+    
 
     title = models.CharField(max_length= 128, verbose_name= '제목', default= '모르겠어요')
     author = models.ForeignKey('user.meokda_user', on_delete = models.CASCADE, verbose_name = '작성자', null = True )
@@ -29,8 +31,6 @@ class Video(models.Model):
     def get_absolute_url(self):
         return reverse('video:video_list')
     
-    class Meta:
-      ordering = ['-created_at']
 
 
 

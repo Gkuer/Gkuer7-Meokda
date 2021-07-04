@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:pk>/edit/',views.VideoDetailView.as_view(), name = 'video_edit'),
     path('<int:pk>/delete/',views.VideoDeleteView.as_view(), name = 'video_delete'),
     path('UserProfile/<str:username2>/', views.UserProfile),
+    path('new_sup/', views.Search_try, name='search'),
 ]

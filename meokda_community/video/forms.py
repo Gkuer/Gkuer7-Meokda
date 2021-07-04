@@ -16,9 +16,12 @@ class VideoForm(forms.ModelForm):
         model = Video
         fields = [
             'restaurant',
+            'address',
             'foodname',
             'file',
             'price',
             'status',
-            'distance',
+            'mapx',
+            'mapy'
+
         ]
