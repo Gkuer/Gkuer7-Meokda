@@ -1,0 +1,22 @@
+{% load bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% bootstrap_css%}
+  <link rel="stylesheet" href="{% static 'css/bootstrap_mint.css' %}"> 
+  <title>MEOKDA</title>
+</head>
+<body>
+  {% include '_navbar.html' %}
+  <div class="container" style="margin-top: 100px;">
+  {% block content %}
+  
+  {% endblock content %}
+  </div>
+  {% bootstrap_javascript %}
+</body>
+</html>

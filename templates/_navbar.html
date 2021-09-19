@@ -1,0 +1,43 @@
+{% load static %}
+<!-- navbar -->
+  <section style='position: fixed; z-index:666;top:0; right: 0; left:0;'>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'videos:main' %}">Meokda</a>
+        <ul class="navbar-nav ml-auto">
+        <a href="{% url 'videos:upload' %}"><button type="button" class="btn btn-info mr-5" style="white-space:nowrap;">글쓰기</button></a>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'videos:main' %}">Home
+            </a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item " style="margin-top: 3;">
+            <div class="box"
+              style="background: #BDBDBD; width: 35px; height: 35px; border-radius: 70%; overflow: hidden;">
+              <img class="profile" style="width: 100%; height: 100%; object-fit: cover;" src="{% static 'images/normal_profile.jpg' %}">
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"href="{% url 'accounts:profile' user.pk %}"> {{ request.user }} </a>
+          </li>
+          <li class="nav-item">
+            <form class="d-inline"action="{% url 'accounts:logout' %}" method="POST">
+            {% csrf_token %}
+              <button class="btn btn-link" style='color: #c9e6dd; padding: 8px; border:0px;'>logout</button>
+            </form>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/about">About</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:about' %}">About</a>
+          </li>
+
+          {% endif %}
+        </ul>
+    </nav>
+  </section>

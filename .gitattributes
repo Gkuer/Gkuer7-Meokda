@@ -1,0 +1,4 @@
+login.gif filter=lfs diff=lfs merge=lfs -text
+README.assets/login.gif filter=lfs diff=lfs merge=lfs -text
+README.assets/main.gif filter=lfs diff=lfs merge=lfs -text
+/Users/gkuer/Desktop/GitHub/Gkuer7-Meokda/README.assets filter=lfs diff=lfs merge=lfs -text
