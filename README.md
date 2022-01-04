@@ -17,7 +17,9 @@
 현재 자신의 위치 주변에 맛집들의 음식 동영상들이 와르르!<br>
 뭐 먹을지 고민하고 있나요? 우리가 도와줄게요.
 
-![main](README.assets/main.gif)
+<img width="1515" alt="스크린샷 2021-02-02 오후 9 51 29" src="https://user-images.githubusercontent.com/64361457/106602886-f1c00c80-65a0-11eb-8956-bc91d8db5d5a.png">
+
+
 
 
 
@@ -35,11 +37,13 @@
 
 
 
-![login](README.assets/login.gif)
+<img width="1792" alt="스크린샷 2021-02-02 오후 9 49 26" src="https://user-images.githubusercontent.com/64361457/106602852-e836a480-65a0-11eb-9657-732dfe9bc701.png">
 
 미배포로 Social Login 미구현
 
 기존 버전과 내용은 같으나, Navbar를 include 이용으로 변경, Http Method 및 Next 파라미터에 대한 반응 추가
+
+
 
 * accounts/views.py
 
@@ -152,9 +156,9 @@ def signup(request):
 
 ## 2.1.4 Video Upload
 
-![VideoUpload](README.assets/VideoUpload.png)
 
-기존: 
+
+<img width="1792" alt="스크린샷 2021-02-02 오후 9 50 35" src="https://user-images.githubusercontent.com/64361457/106602876-ee2c8580-65a0-11eb-9379-2a2adc401d2e.png">
 
 <img width="1515" alt="스크린샷 2021-02-02 오후 9 51 29" src="https://user-images.githubusercontent.com/64361457/124398396-7a112c00-dd50-11eb-8a93-d47edbf6bb7b.png">
 
@@ -457,4 +461,3 @@ def upload(request):
 
 
 <h3 style = "text-align:center;"> gkuer7
-
