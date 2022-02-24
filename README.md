@@ -5,7 +5,7 @@
 ### 	Version Update Record
 
 * Entire Code Update (21.09.19.)
-* 최초 완성 및 Web 배포 (21.05.10.)
+* 최초 완성 (21.05.10.)
 
 
 
